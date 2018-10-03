@@ -5,13 +5,14 @@ namespace Russia_Survival_Devolved
 {
     class Program
     {
-        
+        static bool isGopnik = false, isBarbarian = false, isScientist = false;
         static void Main(string[] args)
         {
             StartScreen();
             Introduction();
             NameSelect();
             Class();
+            House();
             Console.ReadLine();
         }
 
@@ -43,8 +44,9 @@ namespace Russia_Survival_Devolved
 
         static void Introduction()
         {
-            Console.WriteLine("The year is 1921. In the Soviet Union people are starving, and you are one of them.\n" +
+            Console.WriteLine("In the Soviet Union people are starving, and you are one of them.\n" +
                 "Only the strongest Russians will survive...\n" +
+                "The goal with this game is to survive 10 days by any means.\n" +
                 "Controls: 1, 2, 3, 4, 5 and enter");
         }
 
@@ -53,9 +55,9 @@ namespace Russia_Survival_Devolved
             string playerName;
             Console.WriteLine("Before we begin. please enter you name:");
             playerName = Console.ReadLine();
+            Console.Clear();
 
             Console.WriteLine(playerName + " is a bad name. Your name is now Ivan.");
-            Thread.Sleep(3000);
             Console.Clear();
         }
 
@@ -63,7 +65,7 @@ namespace Russia_Survival_Devolved
         static void Class()
         {
             string playerClass, classConfirm;
-            bool isGopnik = false, isBarbarian = false, isScientist = false;
+            
 
             do
             {
@@ -80,6 +82,7 @@ namespace Russia_Survival_Devolved
                         "Are you sure you want to be a Gopnik?\n" +
                         "1. Yes\n2. No\n");
                     classConfirm = Console.ReadLine();
+                    Console.Clear();
                     
                     if (classConfirm == "1")
                     {
@@ -99,6 +102,7 @@ namespace Russia_Survival_Devolved
                         "Are you sure you want to be a Barbarian?\n" +
                         "1. Yes\n2. No\n");
                     classConfirm = Console.ReadLine();
+                    Console.Clear();
                     if (classConfirm == "1")
                     {
                         isBarbarian = true;
@@ -116,6 +120,7 @@ namespace Russia_Survival_Devolved
                         "Are you sure you want to be a Crazy Russian Scientist?\n" +
                         "1. Yes\n2. No\n");
                     classConfirm = Console.ReadLine();
+                    Console.Clear();
                     if (classConfirm == "1")
                     {
                         isScientist = true;
@@ -129,6 +134,96 @@ namespace Russia_Survival_Devolved
             } while (isGopnik == false && isBarbarian == false && isScientist == false); 
         }
         
+        static void House()
+        {
+            string actionChoice;
+            Random rng = new Random();
+            int randomItem = 0;
 
+            Console.WriteLine("In the year 1921, Ivan wakes up in a wreck of a house in Novosibirsk. It's very cold this winter.\n" +
+                "What do you want to do?\n" +
+                "1.Stay in your bedroom\n" +
+                "2.Go to the kitchen\n" +
+                "3.Go to the living room\n" +
+                "4.Go outside");
+            
+            string movementChoice = Console.ReadLine();
+            Console.Clear();
+            if (movementChoice == "1")
+            {
+                Console.WriteLine("Your bedroom is very simple and conatins only a bed, a nightstand and a closet.");
+                if (isGopnik == true)
+                {
+                    Console.WriteLine("What would you like to do?\n" +
+                        "1.Check your bed\n" +
+                        "2.Check your nightstand\n" +
+                        "3.Check you closet\n" +
+                        "4.Go back");
+                    actionChoice = Console.ReadLine();
+                    Console.Clear();
+                    if (actionChoice == "1")
+                    {
+                        Console.WriteLine("You find:" +
+                            "s" +randomItem);
+
+                            
+                        randomItem = rng.Next(1, 4);
+                        switch (randomItem)
+                        {
+                            case 1:
+                                Console.WriteLine("One almost empty bottle of vodka");
+                                break;
+                            case 2:
+                                Console.WriteLine("Half a can of tuna");
+                                break;
+                            case 3:
+                                Console.WriteLine("Half a ball of yarn");
+                                break;
+                        }
+                    }
+                    else if (actionChoice == "1")
+                    {
+                        Console.WriteLine("You find:" +
+                            "s" + randomItem);
+
+
+                        randomItem = rng.Next(1, 4);
+                        switch (randomItem)
+                        {
+                            case 1:
+                                Console.WriteLine("One almost empty bottle of vodka");
+                                break;
+                            case 2:
+                                Console.WriteLine("Half a can of tuna");
+                                break;
+                            case 3:
+                                Console.WriteLine("Half a ball of yarn");
+                                break;
+                        }
+                    }
+                    else if (actionChoice == "1")
+                    {
+                        Console.WriteLine("You find:" +
+                            "s" + randomItem);
+
+
+                        randomItem = rng.Next(1, 4);
+                        switch (randomItem)
+                        {
+                            case 1:
+                                Console.WriteLine("One almost empty bottle of vodka");
+                                break;
+                            case 2:
+                                Console.WriteLine("Half a can of tuna");
+                                break;
+                            case 3:
+                                Console.WriteLine("Half a ball of yarn");
+                                break;
+                        }
+                    }
+
+                }
+            }
+        }
     }
 }
