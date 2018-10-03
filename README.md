@@ -5,14 +5,15 @@ namespace Russia_Survival_Devolved
 {
     class Program
     {
-        static bool isGopnik = false, isBarbarian = false, isScientist = false;
+        static bool isGopnik = false, isBarbarian = false, isScientist = false, isGoback = false;
+        static string movementChoice;
         static void Main(string[] args)
         {
             StartScreen();
             Introduction();
             NameSelect();
             Class();
-            House();
+            House_Start();
             Console.ReadLine();
         }
 
@@ -133,97 +134,146 @@ namespace Russia_Survival_Devolved
 
             } while (isGopnik == false && isBarbarian == false && isScientist == false); 
         }
-        
-        static void House()
+        static void House_Start()
         {
+            Console.WriteLine("In the year 1921, Ivan wakes up in a wreck of a house in Novosibirsk. It's very cold this winter.\n" +
+                    "What do you want to do?\n" +
+                    "1.Stay in your bedroom\n" +
+                    "2.Go to the kitchen\n" +
+                    "3.Go to the living room\n" +
+                    "4.Go outside");
+
+            movementChoice = Console.ReadLine();
+            Console.Clear();
+        }
+        static void Bedroom_Gopnik()
+        {
+            
             string actionChoice;
             Random rng = new Random();
             int randomItem = 0;
-
-            Console.WriteLine("In the year 1921, Ivan wakes up in a wreck of a house in Novosibirsk. It's very cold this winter.\n" +
-                "What do you want to do?\n" +
-                "1.Stay in your bedroom\n" +
-                "2.Go to the kitchen\n" +
-                "3.Go to the living room\n" +
-                "4.Go outside");
-            
-            string movementChoice = Console.ReadLine();
-            Console.Clear();
-            if (movementChoice == "1")
-            {
-                Console.WriteLine("Your bedroom is very simple and conatins only a bed, a nightstand and a closet.");
-                if (isGopnik == true)
+            do
+            { 
+                Console.Clear(); 
+                if (movementChoice == "1")
                 {
-                    Console.WriteLine("What would you like to do?\n" +
-                        "1.Check your bed\n" +
-                        "2.Check your nightstand\n" +
-                        "3.Check you closet\n" +
-                        "4.Go back");
-                    actionChoice = Console.ReadLine();
-                    Console.Clear();
-                    if (actionChoice == "1")
+                    do
                     {
-                        Console.WriteLine("You find:" +
-                            "s" +randomItem);
-
-                            
-                        randomItem = rng.Next(1, 4);
-                        switch (randomItem)
+                        Console.WriteLine("Your bedroom is very simple and conatins only a bed, a nightstand and a closet.\n");
+                        Console.WriteLine("What would you like to do?\n" +
+                            "1.Check your bed\n" +
+                            "2.Check your nightstand\n" +
+                            "3.Check you closet\n" +
+                            "4.Go back");
+                        actionChoice = Console.ReadLine();
+                        Console.Clear();
+                        if (actionChoice == "1")
                         {
-                            case 1:
-                                Console.WriteLine("One almost empty bottle of vodka");
-                                break;
-                            case 2:
-                                Console.WriteLine("Half a can of tuna");
-                                break;
-                            case 3:
-                                Console.WriteLine("Half a ball of yarn");
-                                break;
+                            Console.WriteLine("You find:" +
+                                    + randomItem);
+
+
+                            randomItem = rng.Next(1, 4);
+                            switch (randomItem)
+                            {
+                                case 1:
+                                    Console.WriteLine("One almost empty bottle of vodka");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Half a can of tuna");
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Half a ball of yarn");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Bent fork");
+                                    break;
+                                case 5:
+                                    Console.WriteLine("One sinlge feather");
+                                    break;
+                            }
+                            Thread.Sleep(3500);
+                            isGoback = true;
+                            Console.Clear();
                         }
-                    }
-                    else if (actionChoice == "1")
-                    {
-                        Console.WriteLine("You find:" +
-                            "s" + randomItem);
-
-
-                        randomItem = rng.Next(1, 4);
-                        switch (randomItem)
+                        else if (actionChoice == "2")
                         {
-                            case 1:
-                                Console.WriteLine("One almost empty bottle of vodka");
-                                break;
-                            case 2:
-                                Console.WriteLine("Half a can of tuna");
-                                break;
-                            case 3:
-                                Console.WriteLine("Half a ball of yarn");
-                                break;
+                            Console.WriteLine("You find:" +
+                                    + randomItem);
+
+
+                            randomItem = rng.Next(1, 4);
+                            switch (randomItem)
+                            {
+                                case 1:
+                                    Console.WriteLine("One almost empty bottle of vodka");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Half a can of tuna");
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Half a ball of yarn");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Bent fork");
+                                    break;
+                                case 5:
+                                    Console.WriteLine("One sinlge feather");
+                                    break;
+                            }
+                            Thread.Sleep(3500);
+                            isGoback = true;
+                            Console.Clear();
                         }
-                    }
-                    else if (actionChoice == "1")
-                    {
-                        Console.WriteLine("You find:" +
-                            "s" + randomItem);
-
-
-                        randomItem = rng.Next(1, 4);
-                        switch (randomItem)
+                        else if (actionChoice == "3")
                         {
-                            case 1:
-                                Console.WriteLine("One almost empty bottle of vodka");
-                                break;
-                            case 2:
-                                Console.WriteLine("Half a can of tuna");
-                                break;
-                            case 3:
-                                Console.WriteLine("Half a ball of yarn");
-                                break;
+                            Console.WriteLine("You find:" +
+                                    +randomItem);
+
+
+                            randomItem = rng.Next(1, 4);
+                            switch (randomItem)
+                            {
+                                case 1:
+                                    Console.WriteLine("One almost empty bottle of vodka");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Half a can of tuna");
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Half a ball of yarn");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Bent fork");
+                                    break;
+                                case 5:
+                                    Console.WriteLine("One sinlge feather");
+                                    break;
+                            }
+                            Thread.Sleep(3500);
+                            isGoback = true;
+                            Console.Clear();
                         }
-                    }
+                        else
+                        {
+                            isGoback = true;
+                            Console.Clear();
+                        }
+                    } while (isGoback == true);
 
                 }
-            }
+                    else if (isBarbarian == true)
+                    {
+                        Console.WriteLine("It's a regular bedroom");
+                        isGoback = true;
+                    }
+                
+            } while (isGoback == true);                     
         }
+        static void LowTierItem()
+        {
+
+        }
+        
     }
 }
