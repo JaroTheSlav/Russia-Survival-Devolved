@@ -5,9 +5,9 @@ namespace Russia_Survival_Devolved
 {
     class Program
     {
-        static bool isGopnik = false, isBarbarian = false, isScientist = false, isGoback = false, isGoToStart = false;
-        static string movementChoice, playerClass, classConfirm;
-        static int randomItem = 0, HP = 100;
+        static bool isGopnik = false, isBarbarian = false, isScientist = false, isGoback = false, isGoToStart = false, hasKnife = false, hasFist = false, hasMolotov = false, Win = false;
+        static string MovementChoice, PlayerClass, ClassConfirm, EnemyName = " ", Weapon;
+        static int RandomItem = 0, PlayerHP = 0, PlayerDMG = 0, EnemyDMG = 0, EnemyHP, FullHP;
         static Random rng = new Random();
         static void Main(string[] args)
         {
@@ -15,19 +15,11 @@ namespace Russia_Survival_Devolved
             Introduction();
             NameSelect();
             Class();
-            Start();
-            if (isGopnik == true)
+            do
             {
-                House_Gopnik();
-            }
-            else if (isBarbarian == true)
-            {
-                House_Barbarian(); 
-            }
-            else if (isScientist)
-            {
-                House_scientist();
-            }
+                Start();
+            } while (isGoToStart == true);
+            Outside_Start();
 
             Console.ReadLine();
         }
@@ -85,23 +77,24 @@ namespace Russia_Survival_Devolved
             {
                 Console.Clear();
                 Console.WriteLine("What is class, Ivan?\n1. Gopnik\n2. Slavic Barbarian\n3. Crazy Russian Sceintist");
-                playerClass = Console.ReadLine();
+                PlayerClass = Console.ReadLine();
                 Console.Clear();
 
-                if (playerClass == "1")
+                if (PlayerClass == "1")
                 {
                     Console.WriteLine("You are not be strong, or the big but you are move very fast.\n" +
                         "With Adidas tracksuityou have learn to steal and stealth.\n" +
-                        "Strength: 4\nAgility: 10\nIntelligence: 6\n" 
+                        "Strength: 4\nAgility: 10\nIntelligence: 6\n" +
                         "Are you sure you want to be Gopnik?\n" +
                         "1. Yes\n2. No\n");
-                    classConfirm = Console.ReadLine();
+                    ClassConfirm = Console.ReadLine();
                     Console.Clear();
 
-                    if (classConfirm == "1")
+                    if (ClassConfirm == "1")
                     {
                         isGopnik = true;
-                        HP = 35;
+                        FullHP = 35;
+                        PlayerHP = 35;
                     }
                     else
                     {
@@ -109,38 +102,40 @@ namespace Russia_Survival_Devolved
                     }
 
                 }
-                else if (playerClass == "2")
+                else if (PlayerClass == "2")
                 {
                     Console.WriteLine("Throughout your whole life, you have solve all problem with fighting.\n " +
                         "You are a very strong, very dumb, slavic barbarian.\n" +
                         "Strength: 10\nAgility: 2\nIntelligence: 3\n" +
                         "Are you sure you want to be a Barbarian?\n" +
                         "1. Yes\n2. No\n");
-                    classConfirm = Console.ReadLine();
+                    ClassConfirm = Console.ReadLine();
                     Console.Clear();
-                    if (classConfirm == "1")
+                    if (ClassConfirm == "1")
                     {
                         isBarbarian = true;
-                        HP = 60;
+                        FullHP = 60;
+                        PlayerHP = 60;
                     }
                     else
                     {
                         isBarbarian = false;
                     }
                 }
-                else if (playerClass == "3")
+                else if (PlayerClass == "3")
                 {
                     Console.WriteLine("You were very good in school but you lost it all\n" +
                         "when you used your intelligence to create chemical weapon.\n" +
                         "Strength: 2\nAgility: 4\nIntelligence: 10\n" +
                         "Are you sure you want to be a Crazy Russian Scientist?\n" +
                         "1. Yes\n2. No\n");
-                    classConfirm = Console.ReadLine();
+                    ClassConfirm = Console.ReadLine();
                     Console.Clear();
-                    if (classConfirm == "1")
+                    if (ClassConfirm == "1")
                     {
                         isScientist = true;
-                        HP = 20;
+                        FullHP = 20;
+                        PlayerHP = 20;
                     }
                     else
                     {
@@ -153,75 +148,156 @@ namespace Russia_Survival_Devolved
         static void Start()//Oberoende av klass startar användaren på samma ställe, i huset. Här får man välja vart man ska gå.
         {
             Console.WriteLine("In the year 1921, Ivan wakes up in wreck of a house in Novosibirsk. It is very cold this winter.\n" +
-                    "");
+                "You realise babushka(grandmother) is maybe cold. You have to check up on her.\n" +
+                    "1. Check your nightstand\n2. Check the kitchen\n3. Go outside");
 
-            movementChoice = Console.ReadLine();
-            Console.Clear();
-
-        }
-        static void House_Gopnik()//Om spelaren har valt klassen Gopnik de dessa resultaten beroende på vad de valde att göra i House_Start.
-        {
+            MovementChoice = Console.ReadLine();        
             if (isGopnik == true)
             {
+                Console.Clear();
+                if (MovementChoice == "1")
+                {
+                    Console.WriteLine("On your left, as you sit up in your bed is nightstand.\n");
+                    Console.WriteLine("You search nightstand\n");
+                    if (isGopnik == true)
+                    {
+                        Console.WriteLine("You find:\nKnife");
+                        hasKnife = true;
+                        Weapon = "knife";
+                        PlayerDMG = 14;
+                        Console.ReadKey();
+                        Console.Clear();
+                        isGoToStart = true;
+                    }
+                    else if (isBarbarian == true)
+                    {
+                        Console.WriteLine("You search the nightstand, but find nothing so you break it\n");
+                        Console.ReadKey();
+                        hasFist = true;
+                        Weapon = "fists";
+                        PlayerDMG = 12;
+                        Console.Clear();
+                        isGoToStart = true;
+                    }
+                    else if (isScientist == true)
+                    {
+                        Console.WriteLine("You find:\n2 Molotov");
+                        hasMolotov = true;
+                        Weapon = "molotov";
+                        PlayerDMG = 14;
+                        Console.ReadKey();
+                        Console.Clear();
+                        isGoToStart = true;
+                    }
+                }
+                else if (MovementChoice == "2")
+                {
+                    Console.WriteLine("You go to kitchen, and see vodka bottle.\n" +
+                        "You all vodka, but you feel nothing because you are Russian");
+                    Console.ReadKey();
                     Console.Clear();
-                    if (movementChoice == "1")
-                    {
-                            Console.WriteLine("On your left, as you sit up in your bed is nightstand.\n");
-                            Console.WriteLine("You search nightstand\n");
-                            Console.WriteLine("You find:\nKnife");
-                    }
-                    else if (movementChoice == "2")
-                    {
-                        Console.WriteLine("You go to kitchen, and see vodka bottle.\n" +
-                            "You all vodka, but you feel nothing because you are Russian");
-                    }
-                    else if (movementChoice == "3")
-                    {
-                         Console.WriteLine("You walk outside and feel cold december air.\n" +
-                             "On your left you see bear. You become startle but worry not, is only Misha the bear.");
-                    }
 
+                }
+                else if (MovementChoice == "3")
+                {
+                    Console.WriteLine("You walk outside and feel cold december air.\n" +
+                        "On your left you see bear. You become startle but worry not, is only Misha the bear.");
+                    Console.ReadLine();
+                }
+            }
+        }
+        static void Outside_Start()
+        {
+            do
+            {
+                Console.WriteLine("You see two paths.\n" +
+                    "1. Dark dense forest\n" +
+                    "2. Regular forest");
+                
+                MovementChoice = Console.ReadLine();
+                if (MovementChoice == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("You start sneaking through the forest, in the bushes.\n" +
+                        "Suddenly you hear noise. It is childhood bully Vanya.\n" +
+                        "What do you want to do?\n" +
+                        "1. Attack him for all the time he bullied you.\n" +
+                        "2.Keep moving");
+                    MovementChoice = Console.ReadLine();
+                    if(MovementChoice == "1")
+                    {
+                        EnemyName = "Vanya";
+                        EnemyHP = rng.Next(35, 45);
+                        EnemyDMG = rng.Next(5, 8);
+                        if(isGopnik == true)
+                        {
+                            if(hasKnife == true)
+                            {
+                                Console.WriteLine("You gather the courage to go up to him sneakily, in the shadows.\n");
+
+                                BattleSystem();
+                                
+                            }
+                            else if(hasKnife == false)
+                            {
+                                Console.WriteLine("You run at Vanya and start to attack him.");
+                                Console.Clear();
+                                BattleSystem();
+                            }
+                        }
+                        else if (isBarbarian == true)
+                        {
+                            Console.WriteLine("You remember that you didn't have a bully, so you go to bully him instead.\n" +
+                                "You run up to him to attack him.");
+                            BattleSystem();
+                        }
+                        else if(isScientist == true)
+                        {
+                            if (hasMolotov == true)
+                            {
+
+                            }
+                            else if (hasMolotov == true)
+                            {
+
+                            }
+                        }
+                    }
+                }
+                else if (MovementChoice == "2")
+                {
+                    Console.WriteLine("You get flashback to childhood and move on, past Vanya.");
+                    Field();
+                }
+                else
+                {
+                    isGoback = true;
+                }
+            } while (isGoback == true);
+        }
+        static void Field()
+        {
+            Console.WriteLine("You finally walk out of the forest, and come to a big field.");
+        }
+        static void BattleSystem()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (EnemyHP <= 0)
+                {
+
+                }
+                else if (PlayerHP <= 0)
+                {
+
+                }
+                Console.WriteLine("What do you want to do?                                                                                      HP: " + PlayerHP + "/" + FullHP + "\n" +
+                    "1. Attack\n2. Run away");
+                
+                
                 
             }
         }
-        static void House_Barbarian()//Om spelaren har valt klassen Slavic Barbarian får de dessa resultaten beroende på vad de valde att göra i House_Start.
-        {
-            Console.Clear();
-            if (movementChoice == "1")
-            {
-                Console.WriteLine("You look at nightstand and break it\n");
-                
-            }
-            else if (movementChoice == "2")
-            {
-                Console.WriteLine("You go to kitchen, and see vodka bottle.\n" +
-                    "You all vodka, but you feel nothing because you are Russian");
-            }
-            else if (movementChoice == "3")
-            {
-                Console.WriteLine("You walk outside and feel cold december air.\n" +
-                    "On your left you see bear. You become startle but worry not, is only Misha the bear.");
-            }
-        }
-        static void House_scientist()//Om spelaren har valt klassen Crazy Russian Scientist får de dessa resultaten beroende på vad de valde att göra i House_Start.
-        {
-            Console.Clear();
-            if (movementChoice == "1")
-            {
-                Console.WriteLine("On your left, as you sit up in your bed is nightstand.\n");
-                Console.WriteLine("You search nightstand\n");
-                Console.WriteLine("You find:\n2 Molotov");
-            }
-            else if (movementChoice == "2")
-            {
-                Console.WriteLine("You go to kitchen, and see vodka bottle.\n" +
-                    "You all vodka, but you feel nothing because you are Russian");
-            }
-            else if (movementChoice == "3")
-            {
-                Console.WriteLine("You walk outside and feel cold december air.\n" +
-                    "On your left you see bear. You become very scarebut worry not, is only Misha the bear.");
-            }
-        }       
+        
     }
 }
