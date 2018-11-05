@@ -94,7 +94,7 @@ namespace Russia_Survival_Devolved
                     if (ClassConfirm == "1")
                     {
                         isGopnik = true;
-                        
+
                     }
                     else
                     {
@@ -114,7 +114,7 @@ namespace Russia_Survival_Devolved
                     if (ClassConfirm == "1")
                     {
                         isBarbarian = true;
-                        
+
                     }
                     else
                     {
@@ -133,7 +133,7 @@ namespace Russia_Survival_Devolved
                     if (ClassConfirm == "1")
                     {
                         isScientist = true;
-                        
+
                     }
                     else
                     {
@@ -149,7 +149,7 @@ namespace Russia_Survival_Devolved
             Console.WriteLine("In the year 1921, Ivan wakes up in wreck of a house in Novosibirsk. It is very cold this winter.\n" +
                 "You realise babushka(grandmother) is maybe cold. You have to check up on her. She lives in house far away.\n" +
                 "But babushka has very complicated verification process. To be allowed in her house you need to find all of the pieces to her key.\n" +
-                "She has trusted 4 people with this key. You have to get the key pieces from them in any way possible.\n");
+                "She has trusted 2 people with this key. You have to get the key pieces from them in any way possible.\n");
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("1. Check your nightstand\n2. Check the kitchen\n3. Go outside");
@@ -165,8 +165,8 @@ namespace Russia_Survival_Devolved
                     {
                         Console.WriteLine("You find:\nKnife");
                         hasKnife = true;
-                        
-                        
+
+
                         Console.ReadKey();
                         Console.Clear();
                         isGoToStart = true;
@@ -176,8 +176,8 @@ namespace Russia_Survival_Devolved
                         Console.WriteLine("You search the nightstand, but find nothing so you break it\n");
                         Console.ReadKey();
                         hasFist = true;
-                        
-                        
+
+
                         Console.Clear();
                         isGoToStart = true;
                     }
@@ -185,7 +185,7 @@ namespace Russia_Survival_Devolved
                     {
                         Console.WriteLine("You find:\n2 Molotov");
                         hasMolotov = true;
-                        
+
 
                         Console.ReadKey();
                         Console.Clear();
@@ -386,22 +386,19 @@ namespace Russia_Survival_Devolved
                 {
                     if (isGopnik == true)
                     {
-                        Console.WriteLine("1. \n2. \n3. ");
-                        ActionChoice = Console.ReadLine();
-
-                        if(ActionChoice == "1")
+                        Chance = rng.Next(0, 10);
+                        if(Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8)
                         {
-
+                            Console.WriteLine("Ivan: Look over there!\n" +
+                            "The mole looks back and before he can notice you grab the key piece");
                         }
-                        else if (ActionChoice == "2")
+                        else
                         {
-
-                        }
-                        else if (ActionChoice == "3")
-                        {
-
+                            Console.WriteLine("Ivan: Look over there!\n" +
+                                "Mole:");
                         }
                     }
+
                     else if (isBarbarian == true)
                     {
                         Console.WriteLine("1. \n2. \n3. ");
@@ -442,14 +439,6 @@ namespace Russia_Survival_Devolved
             } while (isGoback == true);
         }
         static void Enemy2()
-        {
-
-        }
-        static void Enemy3()
-        {
-
-        }
-        static void Enemy4()
         {
 
         }
