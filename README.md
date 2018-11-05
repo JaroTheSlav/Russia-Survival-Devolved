@@ -6,9 +6,10 @@ namespace Russia_Survival_Devolved
     class Program
     {
         static bool isGopnik = false, isBarbarian = false, isScientist = false, isGoback = false, isGoToStart = false, hasKnife = false, hasFist = false, hasMolotov = false, Win = false;
-        static string MovementChoice, PlayerClass, ClassConfirm, EnemyName = " ", Weapon;
+        static string MovementChoice, ActionChoice, PlayerClass, ClassConfirm, EnemyName = " ", Weapon;
         static int RandomItem = 0, PlayerHP = 0, PlayerDMG = 0, EnemyDMG = 0, EnemyHP, FullHP;
         static Random rng = new Random();
+        static int Chance = rng.Next(0, 3);
         static void Main(string[] args)
         {
             StartScreen();
@@ -147,14 +148,18 @@ namespace Russia_Survival_Devolved
         }
         static void Start()//Oberoende av klass startar användaren på samma ställe, i huset. Här får man välja vart man ska gå.
         {
+            isGoToStart = false;
             Console.WriteLine("In the year 1921, Ivan wakes up in wreck of a house in Novosibirsk. It is very cold this winter.\n" +
-                "You realise babushka(grandmother) is maybe cold. You have to check up on her.\n" +
-                    "1. Check your nightstand\n2. Check the kitchen\n3. Go outside");
-
-            MovementChoice = Console.ReadLine();        
+                "You realise babushka(grandmother) is maybe cold. You have to check up on her. She lives in house far away.\n" +
+                "But babushka has very complicated verification process. To be allowed in her house you need to find all of the pieces to her key.\n" +
+                "She has trusted 4 people with this key. You have to get the key pieces from them in any way possible.\n");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("1. Check your nightstand\n2. Check the kitchen\n3. Go outside");
+            MovementChoice = Console.ReadLine();
             if (isGopnik == true)
             {
-                Console.Clear();
+                    Console.Clear();
                 if (MovementChoice == "1")
                 {
                     Console.WriteLine("On your left, as you sit up in your bed is nightstand.\n");
@@ -196,7 +201,7 @@ namespace Russia_Survival_Devolved
                         "You all vodka, but you feel nothing because you are Russian");
                     Console.ReadKey();
                     Console.Clear();
-
+                    isGoToStart = true;
                 }
                 else if (MovementChoice == "3")
                 {
@@ -205,99 +210,208 @@ namespace Russia_Survival_Devolved
                     Console.ReadLine();
                 }
             }
+            
         }
         static void Outside_Start()
         {
+            Console.Clear();
+                Console.WriteLine("You see two paths. Which one do you follow?\n" +
+                    "1. Left\n" +
+                    "2. Right");
+            MovementChoice = Console.ReadLine();
+            if (MovementChoice == "1")
+            {
+                Enemy1();
+            }
+            else if(MovementChoice == "2")
+            {
+                Enemy2();
+            }
+        }
+        static void Enemy1()
+        {
             do
             {
-                Console.WriteLine("You see two paths.\n" +
-                    "1. Dark dense forest\n" +
-                    "2. Regular forest");
-                
-                MovementChoice = Console.ReadLine();
-                if (MovementChoice == "1")
+                Console.WriteLine("You enter a field, that is completely empty. Suddenly, out of ground comes big mole.\n");
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Mole: Hello, traveler. What is your business in my field?\n" +
+                    "1. Fight(strength)\n2. Sneak(agility)\n3. Talk(intelligence)");
+                ActionChoice = Console.ReadLine();
+            
+                if (ActionChoice == "1")
                 {
-                    Console.Clear();
-                    Console.WriteLine("You start sneaking through the forest, in the bushes.\n" +
-                        "Suddenly you hear noise. It is childhood bully Vanya.\n" +
-                        "What do you want to do?\n" +
-                        "1. Attack him for all the time he bullied you.\n" +
-                        "2.Keep moving");
-                    MovementChoice = Console.ReadLine();
-                    if(MovementChoice == "1")
+                    if (isGopnik == true)
                     {
-                        EnemyName = "Vanya";
-                        EnemyHP = rng.Next(35, 45);
-                        EnemyDMG = rng.Next(5, 8);
-                        if(isGopnik == true)
-                        {
-                            if(hasKnife == true)
-                            {
-                                Console.WriteLine("You gather the courage to go up to him sneakily, in the shadows.\n");
+                        Console.WriteLine("Ivan: I want key!\n" +
+                                "Mole: Well then come and get it!");
 
-                                BattleSystem();
-                                
-                            }
-                            else if(hasKnife == false)
-                            {
-                                Console.WriteLine("You run at Vanya and start to attack him.");
-                                Console.Clear();
-                                BattleSystem();
-                            }
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8)
+                        {
+                            Console.WriteLine("You fight the mole with all your might and manage to come out victorious.\n" +
+                                "Mole: Have mercy blyat! You can have key just leave me alone!");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("The mole crawls back it's hole.");
+                            break;
                         }
-                        else if (isBarbarian == true)
+                        else
                         {
-                            Console.WriteLine("You remember that you didn't have a bully, so you go to bully him instead.\n" +
-                                "You run up to him to attack him.");
-                            BattleSystem();
+                            Console.WriteLine("You try to fight it, but it is stronger than you.\n" +
+                                "Mole: You thought you could just kill me?");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("Returning to last enemy...\n");
+                            isGoback = true;
                         }
-                        else if(isScientist == true)
+                    }
+                    else if (isBarbarian == true)
+                    {
+                        Console.WriteLine("Ivan: I want key!\n" +
+                                "Mole: Well then come and get it!");
+
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8 || Chance == 9 || Chance == 10)
                         {
-                            if (hasMolotov == true)
-                            {
+                            Console.WriteLine("You fight the mole with all your might and manage to come out victorious.\n" +
+                                "Mole: Have mercy blyat! You can have key just leave me alone!");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("The mole crawls back in it's hole.");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You try to fight it, but it is stronger than you.\n" +
+                                "Mole: You thought you could just kill me?");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("Returning to last enemy...\n");
+                            isGoback = true;
+                        }
+                    }
+                    else if (isScientist == true)
+                    {
+                        Console.WriteLine("Ivan: I want key!\n" +
+                                "Mole: Well then come and get it!");
 
-                            }
-                            else if (hasMolotov == true)
-                            {
-
-                            }
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6)
+                        {
+                            Console.WriteLine("You fight the mole with all your might and manage to come out victorious.\n" +
+                                "Mole: Have mercy blyat! You can have key just leave me alone!");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("The mole crawls back it's hole.");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You try to fight it, but it is stronger than you.\n" +
+                                "Mole: You thought you could just kill me?");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("Returning to last enemy...\n");
+                            isGoback = true;
                         }
                     }
                 }
-                else if (MovementChoice == "2")
+                else if(ActionChoice == "2")
                 {
-                    Console.WriteLine("You get flashback to childhood and move on, past Vanya.");
-                    Field();
+                    if (isGopnik == true)
+                    {
+
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8 || Chance == 9 || Chance == 10)
+                        {
+                            Console.WriteLine("You hide behind some rocks so the mole does not see you, then you sneak up behing him and grab to grab key piece.\n" +
+                                "Your thief skills kick in and you grab it without him noticing it.");
+                            break;
+                        }
+                    }
+                    else if (isBarbarian == true)
+                    {
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6)
+                        {
+                            Console.WriteLine("You curl up, because if you can't see him, he can't see you.\n" +
+                                "He doesn't see you because when curled up, you look like a rock.\n" +
+                                "When he looks away you run as fast as you can toward him, grab the key piece and run away.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You try to hide behind a rock, but you are bigger than it.\n" +
+                                "He sees you, but before he can do anything you hit him in the head and grab the key piece");
+                        }
+                    }
+                    else if (isScientist == true)
+                    {
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8)
+                        {
+                            Console.WriteLine("You see a thick bush. You run inside the bush and run up behind the mole.\n" +
+                                "The mole, being almost blind due to a life underground, doesn't see you and you steal the key piece.");
+                            break;
+                        }
+                        else
+                        {
+
+                        }
+                    }
                 }
-                else
+                else if(ActionChoice == "3")
                 {
-                    isGoback = true;
+                    if (isGopnik == true)
+                    {
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (isBarbarian == true)
+                    {
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (isScientist == true)
+                    {
+                        Chance = rng.Next(0, 10);
+                        if (Chance == 1 || Chance == 2 || Chance == 3 || Chance == 4 || Chance == 5 || Chance == 6 || Chance == 7 || Chance == 8 || Chance == 9 || Chance == 10)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
                 }
             } while (isGoback == true);
         }
-        static void Field()
+        static void Enemy2()
         {
-            Console.WriteLine("You finally walk out of the forest, and come to a big field.");
+
         }
-        static void BattleSystem()
+        static void Enemy3()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                if (EnemyHP <= 0)
-                {
 
-                }
-                else if (PlayerHP <= 0)
-                {
-
-                }
-                Console.WriteLine("What do you want to do?                                                                                      HP: " + PlayerHP + "/" + FullHP + "\n" +
-                    "1. Attack\n2. Run away");
-                
-                
-                
-            }
         }
-        
+        static void Enemy4()
+        {
+
+        }
     }
 }
